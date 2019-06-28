@@ -1,0 +1,22 @@
+{%extends "layout.html"%}
+{%block content%}
+<h1 class ="aboutheader">About</h1>
+<div>
+<p>Car Parking data</p>
+</div>
+<div>
+    <form class="login-form" action={{url_for('searchdata')}} method ="POST">
+      <input type="text" placeholder="please type in the car number you want to search" name="rfid"/>
+      <button type="submit">Search</button>
+    </form>
+</div>
+{{ table|safe }}
+<h2>Contact Us </h2>
+<p>
+  <a href="mailto:agyekyaw007@gmail.com">agyekyaw007@gmail.com</a>
+  <br>
+  Yatanarpon Cyber City
+  <br>
+  Pyin Oo Lwin
+</p>
+{%endblock%}

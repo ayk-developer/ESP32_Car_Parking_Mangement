@@ -1,0 +1,13 @@
+{%extends "layout.html"%}
+{%block content%}
+
+<h1>Welcome to the Car Parking Management System</h1>
+
+<li><a href="{{ url_for('index')}}">Home</a></li>
+<li><a href="{{ url_for('parkingdata')}}">Parking Data</a></li>
+<li><a href="{{ url_for('billingdata')}}">Billing Data</a></li>
+<li><a href="{{ url_for('addbill')}}">AddBill</a></li>
+
+
+
+{%endblock%}
