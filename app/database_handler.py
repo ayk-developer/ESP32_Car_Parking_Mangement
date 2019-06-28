@@ -6,9 +6,15 @@ class Database():
         self.cur.execute("CREATE TABLE IF NOT EXISTS parking1(id serial PRIMARY KEY,rfid varchar(20),time abstime NOT NULL DEFAULT CURRENT_TIMESTAMP,inout varchar(5))")
         #self.cur.execute("CREATE TABLE IF NOT EXISTS user(id serial PRIMARY KEY,username varchar(64),email varchar(120),password_hash varchar(128))")
         self.cur.execute("CREATE TABLE IF NOT EXISTS billing(rfid varchar(20) PRIMARY KEY, current_amount INTEGER)")
+        self.cur.execute("CREATE TABLE IF NOT EXISTS rfidnumber(rfid varchar(20) PRIMARY KEY, rfidtag varchar(20))")
         #self.cur.execute("CREATE TABLE IF NOT EXISTS accounts(username STRING PRIMARY KEY, password string)")
         #self.conn.commit()
         #self.current_cars=[]
+
+    def tagtonumber(self,tag):
+        self.cur.execute('SELECT rfid FROM rfidnumber WHERE rfidtag=%s',(tag,))
+        temp=self.cur.fetchall()
+        return temp[0][0]
 
     def logindata(self,username):
         self.cur.execute("SELECT password FROM accounts WHERE username=%s",(username,))
@@ -21,6 +27,7 @@ class Database():
 
 
     def carinout(self,rfid_number,inout):
+        rfid_number=self.tagtonumber(rfid_number)
         self.cur.execute("INSERT INTO parking1(rfid,inout) VALUES(%s,%s)",[rfid_number,inout])
         self.conn.commit()
         #if inout=="in":
@@ -49,13 +56,14 @@ class Database():
             self.cur.execute("UPDATE billing SET current_amount=%s WHERE rfid=%s",(current_amount,rfid))
             self.conn.commit()
 
-    def addbill(self,rfid,amount):
+    def addbill(self,rfid,tag,amount):
         #self.cur.execute("IF NOT EXISTS (SELECT current_amount FROM billing WHERE rfid=%s) BEGIN INSERT INTO billing VALUES(%s,0) END",(rfid,rfid))
         self.cur.execute("SELECT current_amount FROM billing WHERE rfid=%s",(rfid,))
         current_amount=self.cur.fetchall()
         if len(current_amount)==0:
             self.cur.execute("INSERT INTO billing VALUES(%s,%s)",(rfid,0))
-            print('good till here')
+            self.cur.execute("INSERT INTO rfidnumber VALUES(%s,%s)",(rfid,tag))
+            #print('good till here')
         self.cur.execute("SELECT current_amount FROM billing WHERE rfid=%s",(rfid,))
         current_amount=self.cur.fetchall()
         print(current_amount)

@@ -119,8 +119,9 @@ def addbill():
     if request.method == 'POST':
         rfid = request.form.get('rfid')
         amount= request.form.get('amount')
+        tag=request.form.get('tag')
         database=Database()
-        database.addbill(rfid,int(amount))
+        database.addbill(rfid,tag,int(amount))
         table = tabulate(database.viewbill(), tablefmt='html')
         return render_template("parkingdata.html",table=table)
     else:
