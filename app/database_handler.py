@@ -47,14 +47,13 @@ class Database():
         row=self.cur.fetchall()
         return row
 
-    def cutbill(self):
-        for rfid in self.current_cars:
-            self.cur.execute("SELECT current_amount FROM billing WHERE rfid=%s",(rfid,))
-            current_amount=self.cur.fetchall()
-            #print(type(current_amount[0][0]))
-            current_amount=current_amount[0][0]-50
-            self.cur.execute("UPDATE billing SET current_amount=%s WHERE rfid=%s",(current_amount,rfid))
-            self.conn.commit()
+    def cutbill(self,rfid):
+        self.cur.execute("SELECT current_amount FROM billing WHERE rfid=%s",(rfid,))
+        current_amount=self.cur.fetchall()
+        #print(type(current_amount[0][0]))
+        current_amount=current_amount[0][0]-50
+        self.cur.execute("UPDATE billing SET current_amount=%s WHERE rfid=%s",(current_amount,rfid))
+        self.conn.commit()
 
     def addbill(self,rfid,tag,amount):
         #self.cur.execute("IF NOT EXISTS (SELECT current_amount FROM billing WHERE rfid=%s) BEGIN INSERT INTO billing VALUES(%s,0) END",(rfid,rfid))

@@ -17,3 +17,10 @@ class carcounter():
 
     def carcount(self):
         return len(self.carlist)
+
+    def cutbill(self):
+        #print('shit')
+        for car in self.carlist:
+            database=Database()
+            #print(car)
+            database.cutbill(car)
