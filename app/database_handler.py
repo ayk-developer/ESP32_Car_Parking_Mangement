@@ -77,14 +77,13 @@ class Database():
 
     def carcount(self):
         self.cur.execute("SELECT COUNT(*) FROM parking1 Where inout = 'in'")
-        incar=self.cur.fetchall()
+        incar=self.cur.fetchall()[0][0]
         self.cur.execute("SELECT COUNT(*) FROM parking1 Where inout = 'out'")
-        outcar=self.cur.fetchall()
+        outcar=self.cur.fetchall()[0][0]
         amount=incar-outcar
         return amount
 
 
-#database=Database()
 #database.carinout("AA0065","in")
 #database.carinout("AC0098","in")
 #database.carinout("AB0065","in")
