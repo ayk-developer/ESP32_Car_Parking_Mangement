@@ -13,7 +13,8 @@ from tabulate import tabulate
 @app.route('/')
 @app.route("/index")
 def index():
-    carcount=carcounter.carcount()
+    database=Database()
+    carcount=database.carcount()
     print(carcount)
     return render_template("homepage.html",carcount=carcount)
 

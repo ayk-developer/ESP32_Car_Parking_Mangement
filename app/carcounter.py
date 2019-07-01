@@ -7,12 +7,10 @@ class carcounter():
 
     def carin(self,rfid):
         database=Database()
-        rfid=database.tagtonumber(rfid)
         self.carlist.append(rfid)
 
     def carout(self,rfid):
         database=Database()
-        rfid=database.tagtonumber(rfid)
         self.carlist.remove(rfid)
 
     def carcount(self):
@@ -22,5 +20,6 @@ class carcounter():
         #print('shit')
         for car in self.carlist:
             database=Database()
+            rfid=database.tagtonumber(car)
             #print(car)
-            database.cutbill(car)
+            database.cutbill(rfid)
