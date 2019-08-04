@@ -6,7 +6,10 @@
 <li><a href="{{ url_for('index')}}">Home</a></li>
 <li><a href="{{ url_for('parkingdata')}}">Parking Data</a></li>
 <li><a href="{{ url_for('billingdata')}}">Billing Data</a></li>
+
+{% if current_user.username == 'Admin'%}
 <li><a href="{{ url_for('addbill')}}">AddBill</a></li>
+{% endif %}
 
 
 

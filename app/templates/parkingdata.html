@@ -4,12 +4,14 @@
 <div>
 <p>Car Parking data</p>
 </div>
+{% if current_user.username == 'Admin'%}
 <div>
     <form class="login-form" action={{url_for('searchdata')}} method ="POST">
       <input type="text" placeholder="please type in the car number you want to search" name="rfid"/>
       <button type="submit">Search</button>
     </form>
 </div>
+{% endif %}
 {{ table|safe }}
 <h2>Contact Us </h2>
 <p>

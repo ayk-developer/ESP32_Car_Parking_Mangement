@@ -1,8 +1,11 @@
 {%extends "layout.html"%}
 {%block content%}
 <div>
-  <h1>There are currently {{ carcount }} cars in the Parking</h1>
-  </div>
+  {% for parking,value in carcount.items() %}
+  <h1>There are currently {{ 20-value }} freespaces in {{ parking }}</h1>
+  {% endfor %}
+  
+</div>
 
 
   <iframe width="600" height="450" frameborder="0" style="border:0"
