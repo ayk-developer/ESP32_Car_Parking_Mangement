@@ -1,4 +1,4 @@
-from app import carcounter
+#from app import carcounter
 from app import app
 from app import db
 from flask import render_template,request,flash,redirect,url_for,Response
@@ -68,7 +68,9 @@ def parkingdata():
         table = tabulate(database.view(current_user.username), tablefmt='html')
         return render_template("parkingdata.html",table=table)
 
-
+@app.route('/map/')
+def map():
+    return render_template("map.html")
 
 @app.route('/billingdata/')
 @login_required

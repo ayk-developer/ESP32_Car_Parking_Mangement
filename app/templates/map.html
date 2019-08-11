@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+var map;
+var parkingIcon = {
+  greenparking: '/static/icons/parkinggreen.png',
+
+  orangeparking: 'https://i.imgur.com/xP1etVg.png',
+
+  redparking: 'https://i.imgur.com/ulSHgnI.png'
+};
+var myMarkerList = [
+  ['thonetaung', 21.8970145, 96.3568636, 11],
+  ['YCC', 21.8761898, 96.3658241, 20],
+  ['PyinSar', 21.8665312, 96.3521198, 30]
+];
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {
+      lat: 21.8761898,
+      lng: 96.3658241
+    },
+    zoom: 13
+  });
+
+  for (var i = 0; i < myMarkerList.length; i++) {
+    parking = myMarkerList[i];
+    if (parking[3] > 20) {
+      aaa = parkingIcon['greenparking'];
+    } else if (parking[3] > 10) {
+      aaa = parkingIcon['orangeparking'];
+    } else {
+      aaa = parkingIcon['redparking'];
+    }
+
+    var marker = new google.maps.Marker({
+      position: {
+        lat: parking[1],
+        lng: parking[2]
+      },
+      map: map,
+      icon: aaa
+    })
+  }
+
+}
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPVMvpVId6mdZpj8-PMHuMYfl-q0Q7dco&callback=initMap"
+    async defer></script>
+  </body>
+</html>
