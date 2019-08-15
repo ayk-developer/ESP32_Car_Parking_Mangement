@@ -2,18 +2,22 @@
 {%block content%}
 
 
-
-
-
-
-<div>
-  {% for parking,value in carcount.items() %}
-  <h1>There are currently {{ 20-value }} freespaces in {{ parking }}</h1>
-  {% endfor %}
-  
-</div>
-
 <div id="map"></div>
+
+<header class="masthead bg-primary text-white text-center" style="padding-top: 50px;padding-bottom: 150px;">
+    <div class="container align-items-left flex-column">
+
+
+      <!-- Masthead Heading -->
+      {% for parking,value in carcount.items() %}
+      <h1>{{ parking }} has {{ 20-value }} free space</h1>
+  {% endfor %}
+
+
+    </div>
+  </header>
+
+
 <script>
 var map;
 var parkingIcon = {

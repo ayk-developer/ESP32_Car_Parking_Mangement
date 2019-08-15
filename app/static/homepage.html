@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en"><link type="text/css" id="dark-mode" rel="stylesheet" href=""><style type="text/css" id="dark-mode-custom-style"></style><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>ACP System</title>
+        <link rel="stylesheet" href="homepage_files/bootstrap.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="homepage_files/freelancer.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+        <script src="homepage_files/jquery-3.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="homepage_files/popper.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="homepage_files/bootstrap.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<style>
+#map {
+   
+   height: 400px;
+   width:100%;
+   margin: auto;
+ }
+
+
+</style>
+    </head>
+    <body>
+            <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+                    <div class="container">
+                      <a class="navbar-brand js-scroll-trigger" href="#page-top">SMART CARPARKING SYSTEM</a>
+                      <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        Menu
+                        <i class="fas fa-bars"></i>
+                      </button>
+                      <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                          <li class="nav-item mx-0 mx-lg-1">
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Portfolio</a>
+                          </li>
+                          <li class="nav-item mx-0 mx-lg-1">
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+                          </li>
+                          <li class="nav-item mx-0 mx-lg-1">
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </nav>
+                  <header class="masthead bg-primary text-white text-center" style="padding-top: 150px;padding-bottom: 50px;">
+                        <div class="container align-items-left flex-column">
+
+                    
+                          <!-- Masthead Heading -->
+                          <h1 class="masthead-subheading text-uppercase mb-0" style="font-size: 2rem;line-height: 1.4;letter-spacing: 0.012em;font-weight: 700;font-style: normal;">YCC Parking 10 free space</h1>
+                          <h1 class="masthead-subheading text-uppercase mb-0" style="font-size: 2rem;line-height: 1.4;">PyinSar 10 free space</h1>
+                          <h1 class="masthead-subheading text-uppercase mb-0" style="font-size: 2rem;line-height: 1.4;">ThoneTaung 10 free space</h1>
+
+                    
+                        </div>
+                      </header>
+                      <div class="w3-container w3-light-grey" id="map"></div>
+<script>
+var map,infoWindow;
+var parkingIcon = {
+  'greenparking': '/static/icons/parkinggreen.png',
+
+  'orangeparking': '/static/icons/parkingorange.png',
+
+  'redparking': '/static/icons/parkingred.png'
+};
+var myMarkerList = [
+  ['parking1', 21.8970145, 96.3568636],
+  ['schoolparking', 21.8761898, 96.3658241],
+  ['pyinoolwin', 21.8665312, 96.3521198]
+];
+
+
+//var carcount = {{carcount|safe }}
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {
+      lat: 21.8761898,
+      lng: 96.3658241
+    },
+    zoom: 13
+  });
+  infoWindow = new google.maps.InfoWindow;
+
+  if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('You are Here.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+  
+      
+
+  /*for (var i = 0; i < myMarkerList.length; i++) {
+    parking = myMarkerList[i];
+    parkingname= parking[0]
+    if (carcount[parkingname] < 10 ) {
+      aaa = parkingIcon['greenparking'];
+    } else if (carcount[parkingname] > 20) {
+      aaa = parkingIcon['redparking'];
+    } else {
+      aaa = parkingIcon['orangeparking'];
+    }
+
+    var marker = new google.maps.Marker({
+      position: {
+        lat: parking[1],
+        lng: parking[2]
+      },
+      map: map,
+      icon: aaa
+    })
+  }*/
+
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPVMvpVId6mdZpj8-PMHuMYfl-q0Q7dco&callback=initMap" async defer></script>
+<section class="page-section bg-primary text-white mb-0" id="about">
+    <div class="container">
+
+      <!-- About Section Heading -->
+      <h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
+
+      <!-- Icon Divider -->
+      <div class="divider-custom divider-light">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <div class="divider-custom-line"></div>
+      </div>
+
+      <!-- About Section Content -->
+      <div class="row">
+        <div class="col-lg-4 ml-auto">
+          <p class="lead">Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional SASS stylesheets for easy customization.</p>
+        </div>
+        <div class="col-lg-4 mr-auto">
+          <p class="lead">You can create your own custom avatar for the masthead, change the icon in the dividers, and add your email address to the contact form to make it fully functional!</p>
+        </div>
+      </div>
+      </div>
+    
+</body></html>
