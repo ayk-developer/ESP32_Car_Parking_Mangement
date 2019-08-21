@@ -1,21 +1,13 @@
 {%extends "layout.html"%}
 {%block content%}
-<h1 class ="aboutheader">About</h1>
-<div>
-<p>Enter the Car Number and amount</p>
-</div>
-<form method="POST">
-                Car Number: <input type="text" name="rfid"><br>
-                RFID Card Number:<input type="text" name="tag"><br>
-                amount: <input type="text" name="amount"><br>
-                <input type="submit" value="Submit"><br>
+<h1 class ="container" style="padding-top: 100px;">Thank you for purchasing our parking bill!</h1>
+<br>
+<div class="container">
+<form class="form-group" method="POST">
+                Car Number: <input class="form-control mx-sm-3" type="text" name="rfid"><br>
+                RFID Card Number:<input class="form-control mx-sm-3" type="text" name="tag"><br>
+                amount: <input class="form-control mx-sm-3" type="text" name="amount"><br>
+                <input class="btn btn-primary btn" type="submit" value="Submit"><br>
             </form>
-<h2>Contact Us </h2>
-<p>
-  <a href="mailto:agyekyaw007@gmail.com">agyekyaw007@gmail.com</a>
-  <br>
-  Yatanarpon Cyber City
-  <br>
-  Pyin Oo Lwin
-</p>
+</div>
 {%endblock%}

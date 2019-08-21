@@ -1,23 +1,41 @@
 {%extends "layout.html"%}
 {%block content%}
+<div class="container" style="padding-top: 100px;">
 <h1>Sign In</h1>
-<form action="" method="post" novalidate>
+<br>
+<div class="form-inline">
+<form class="form-inline" action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}<br>
+            <div class="form-group">
+            {{ form.username.label }}
+            {{ form.username(class="form-control mx-sm-3" ,size=32) }}
             {% for error in form.username.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
+            </div>
         </p>
+        <br>
         <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}<br>
+            <div class="form-group">
+            {{ form.password.label }}
+            {{ form.password(class="form-control mx-sm-3", size=32) }}
             {% for error in form.password.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
+            </div>
         </p>
-        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-        <p>{{ form.submit() }}</p>
+        <br>
+        {% if status == 1 %}
+        <li class="container">Invalid username or password.</li>
+        {% endif %}
+    </div>
+    <div class="custom-control custom-checkbox my-1 mr-sm-2">
+        <br>
+        {{ form.remember_me(class="custom-control-input") }} {{ form.remember_me.label(class="custom-control-label") }}
+        </div>
+        <br>
+        <p>{{ form.submit(class="btn btn-primary") }}</p>
     </form>
+</div>
 {%endblock%}

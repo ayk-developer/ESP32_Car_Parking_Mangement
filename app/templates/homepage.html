@@ -1,23 +1,25 @@
 {%extends "layout.html"%}
 {%block content%}
 
-
-<div id="map"></div>
-
-<header class="masthead bg-primary text-white text-center" style="padding-top: 50px;padding-bottom: 150px;">
+<div class="container-fluid">
+<div id="map" class="z-depth-1-half map-container" style="margin-top: 80px; padding-top: 150px; height: 600px" ></div>
+</div>
+<br>
+<div class="container-fluid">
+<header class="masthead bg-primary text-white" style="padding-top: 10px;padding-bottom: 150px;">
     <div class="container align-items-left flex-column">
 
 
       <!-- Masthead Heading -->
       {% for parking,value in carcount.items() %}
-      <h1>{{ parking }} has {{ 20-value }} free space</h1>
+      <p class ="lead">{{ parking }} has {{ 20-value }} free spaces.</p>
   {% endfor %}
 
 
     </div>
   </header>
 
-
+</div>
 <script>
 var map;
 var parkingIcon = {

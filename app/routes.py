@@ -22,14 +22,18 @@ def about():
 
 @app.route('/login/',methods=['GET','POST'])
 def login():
+    status=0
     if current_user.is_authenticated:
         return redirect(url_for('loggined'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
-            return redirect(url_for('login'))
+            flash('<li>Invalid username or password</li>')
+            status=1
+            print("flashed")
+            #return redirect(url_for('login'))
+            return render_template('login.html', form=form,status=status)
         login_user(user, remember=form.remember_me.data)
         return redirect(url_for('loggined'))
     return render_template('login.html', form=form)
@@ -60,13 +64,21 @@ def logout():
 @app.route('/parkingdata/')
 @login_required
 def parkingdata():
+    table=[]
+    parking_names=[]
     database=Database('parking1')
     if current_user.username=='Admin':
-        table = tabulate(database.viewadmin(), tablefmt='html')
-        return render_template("parkingdata.html",table=table)
+        temp_dict=database.viewadmin()
+        for i in temp_dict: 
+            table.append(tabulate(temp_dict[i], tablefmt='html'))
+            parking_names.append(i)
+        return render_template("parkingdata.html",table=zip(parking_names,table))
     else:
-        table = tabulate(database.view(current_user.username), tablefmt='html')
-        return render_template("parkingdata.html",table=table)
+        temp_dict=database.view(current_user.username)
+        for i in temp_dict: 
+            table.append(tabulate(temp_dict[i], tablefmt='html'))
+            parking_names.append(i)
+        return render_template("parkingdata.html",table=zip(parking_names,table))
 
 @app.route('/map/')
 def map():
@@ -78,10 +90,25 @@ def billingdata():
     database=Database('parking1')
     if current_user.username=='Admin':
         table = tabulate(database.viwebilladmin(), tablefmt='html')
-        return render_template("parkingdata.html",table=table)
+        return render_template("billingdata.html",table=table)
     else:
         table = tabulate(database.viewbill(current_user.username), tablefmt='html')
-        return render_template("parkingdata.html",table=table)
+        return render_template("billingdata.html",table=table)
+
+@app.route("/searchbill/",methods=["POST"])
+@login_required
+def searchbill():
+    if current_user.username=='Admin':
+        if request.method== 'POST':
+
+            database=Database('parking1')
+            data= (request.form["rfid"])
+
+            table = tabulate(database.viewbill(data), tablefmt='html')
+            return render_template("billingdata.html",table=table)
+
+
+
 
 @app.route('/searchdata/',methods=['POST'])
 @login_required
@@ -89,10 +116,15 @@ def searchdata():
     if current_user.username=='Admin':
         #a=Database('parking1')
         if request.method == 'POST':
+            table=[]
+            parking_names=[]
             data= (request.form["rfid"])
             database=Database('parking1')
-            table = tabulate(database.search(data), tablefmt='html')
-            return render_template("parkingdata.html",table=table)
+            temp_dict=database.view(data)
+            for i in temp_dict: 
+                table.append(tabulate(temp_dict[i], tablefmt='html'))
+                parking_names.append(i)
+            return render_template("parkingdata.html",table=zip(parking_names,table))
             #table = tabulate(request.form["rfid"].search(), tablefmt='html')
             #return render_template("parkingdata.html",table=table)
         return "aaa"

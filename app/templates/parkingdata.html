@@ -1,24 +1,27 @@
 {%extends "layout.html"%}
 {%block content%}
-<h1 class ="aboutheader">About</h1>
-<div>
-<p>Car Parking data</p>
-</div>
+<h1 class ="container" style="padding-top: 100px;">Car Parking Records</h1>
+<br>
+<div class="container">
+    <p class="lead">Currently loggined as {{current_user.username}} </p>
+    </div>
 {% if current_user.username == 'Admin'%}
-<div>
-    <form class="login-form" action={{url_for('searchdata')}} method ="POST">
-      <input type="text" placeholder="please type in the car number you want to search" name="rfid"/>
-      <button type="submit">Search</button>
+<div class= "container">
+    <form class="form-inline" action={{url_for('searchdata')}} method ="POST">
+      <input type="text" class="form-control mx-sm-3" placeholder="Please type in car number" name="rfid"/>
+      <button class="btn btn-primary btn" type="submit">Search</button>
     </form>
 </div>
 {% endif %}
-{{ table|safe }}
-<h2>Contact Us </h2>
-<p>
-  <a href="mailto:agyekyaw007@gmail.com">agyekyaw007@gmail.com</a>
-  <br>
-  Yatanarpon Cyber City
-  <br>
-  Pyin Oo Lwin
-</p>
+<br>
+<br>
+<div class="container">
+{% for i,j in table %}
+<p class="lead">{{i}}</p><br>
+{{ j|safe }}
+<br>
+{% endfor %}
+
+</div>
+
 {%endblock%}

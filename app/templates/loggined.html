@@ -1,16 +1,18 @@
 {%extends "layout.html"%}
 {%block content%}
-
+<div class="container" style="padding-top: 100px;">
 <h1>Welcome to the Car Parking Management System</h1>
+<br><br>
 
-<li><a href="{{ url_for('index')}}">Home</a></li>
-<li><a href="{{ url_for('parkingdata')}}">Parking Data</a></li>
-<li><a href="{{ url_for('billingdata')}}">Billing Data</a></li>
+<li><a class="btn btn-primary btn-lg" role="button" href="{{ url_for('index')}}">Home</a></li><br>
+<li><a class="btn btn-primary btn-lg" role="button" href="{{ url_for('parkingdata')}}">Parking Data</a></li><br>
+<li><a class="btn btn-primary btn-lg" role="button" href="{{ url_for('billingdata')}}">Billing Data</a></li><br>
 
 {% if current_user.username == 'Admin'%}
-<li><a href="{{ url_for('addbill')}}">AddBill</a></li>
+<li><a class="btn btn-primary btn-lg" role="button" href="{{ url_for('addbill')}}">AddBill</a></li><br>
 {% endif %}
 
+</div>
 
 
 {%endblock%}
