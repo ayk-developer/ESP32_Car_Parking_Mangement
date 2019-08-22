@@ -145,6 +145,7 @@ def getdata():
             database.carinout(rfid,inout)
             if inout == 'out':
                 database.cutbill(rfid)
+            return Response(status=200) 
             '''
             if inout == 'in':
                 carcounter.carin(rfid)
