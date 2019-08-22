@@ -4,7 +4,7 @@ from psycopg2 import sql
 class Database():
     def __init__(self,parking):
         self.parking=parking
-        self.conn=psycopg2.connect("dbname='car_parking' user='postgres' password='11111111' host='localhost' port='5432'")
+        self.conn=psycopg2.connect("dbname='d444nf8njcg92a' user='atwzycuaabdruo' password='91fedb3eee2d763d798890cf015a50f4254b41e84c065cb631eb8d84742c5c40' host='ec2-174-129-41-127.compute-1.amazonaws.com' port='5432'")
         self.cur=self.conn.cursor()
 
         self.cur.execute("CREATE TABLE IF NOT EXISTS {} (id serial PRIMARY KEY,rfid varchar(20),time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,inout varchar(5))".format(self.parking))
