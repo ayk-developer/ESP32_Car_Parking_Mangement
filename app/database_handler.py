@@ -116,7 +116,7 @@ class Database():
 
 
 def parkinglist():
-    conn=psycopg2.connect("dbname='car_parking' user='postgres' password='11111111' host='localhost' port='5432'")
+    conn=psycopg2.connect("dbname='d444nf8njcg92a' user='atwzycuaabdruo' password='91fedb3eee2d763d798890cf015a50f4254b41e84c065cb631eb8d84742c5c40' host='ec2-174-129-41-127.compute-1.amazonaws.com' port='5432'")
     cur=conn.cursor()
 
     cur.execute("SELECT tablename FROM pg_catalog.pg_tables where schemaname='public'")
@@ -125,10 +125,11 @@ def parkinglist():
 
     a.remove('billing')
     a.remove('rfidnumber')
+    a.remove('user1')
     return a
 
 def occupied():
-    conn=psycopg2.connect("dbname='car_parking' user='postgres' password='11111111' host='localhost' port='5432'")
+    conn=psycopg2.connect("dbname='d444nf8njcg92a' user='atwzycuaabdruo' password='91fedb3eee2d763d798890cf015a50f4254b41e84c065cb631eb8d84742c5c40' host='ec2-174-129-41-127.compute-1.amazonaws.com' port='5432'")
     cur=conn.cursor()
     a=parkinglist()
     temp_dict={}
