@@ -1,6 +1,7 @@
 import psycopg2
 from psycopg2.extensions import AsIs
 from psycopg2 import sql
+from datetime import datetime
 class Database():
     def __init__(self,parking):
         self.parking=parking
@@ -75,7 +76,9 @@ class Database():
         outtime=self.cur.fetchall()[0][0]
         self.cur.execute("select last_value(time) over() from {} where inout='in' limit 1".format(self.parking))
         intime=self.cur.fetchall()[0][0]
-        dur=outtime-intime
+        print(outtime)
+        print(intime)
+        dur=datetime.strptime(outtime,'%Y-%m-%d %H:%M:%S+%f')-datetime.strptime(intime,'%Y-%m-%d %H:%M:%S+%f')
         cost=int(dur.seconds*0.083)
         print(cost)
         rfid=self.tagtonumber(rfid)

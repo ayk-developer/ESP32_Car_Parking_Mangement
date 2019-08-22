@@ -144,7 +144,9 @@ def getdata():
             database=Database(a)
             database.carinout(rfid,inout)
             if inout == 'out':
+                print('got to out')
                 database.cutbill(rfid)
+
             return Response(status=200) 
             '''
             if inout == 'in':
