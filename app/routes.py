@@ -1,7 +1,7 @@
 #from app import carcounter
 from app import app
 from app import db
-from flask import render_template,request,flash,redirect,url_for,Response
+from flask import render_template,request,flash,redirect,url_for,Response,jsonify
 from app.forms import LoginForm,RegistrationForm
 from flask_login import current_user, login_user,logout_user,login_required
 from app.models import User
@@ -146,8 +146,12 @@ def getdata():
             if inout == 'out':
                 print('got to out')
                 database.cutbill(rfid)
-
-            return Response(status=200) 
+            #database.viewbill(rfid)
+            b=database.viewbill(rfid)
+            Car_Number=b[0][0]
+            Balance=b[0][1]
+            print(Car_Number,Balance)
+            return jsonify(car_number=Car_Number,balance=Balance)
             '''
             if inout == 'in':
                 carcounter.carin(rfid)

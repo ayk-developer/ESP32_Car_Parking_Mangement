@@ -62,8 +62,10 @@ class Database():
         return temp_dict
 
     def viewbill(self,rfid):
+        rfid=self.tagtonumber(rfid)
         self.cur.execute("SELECT * FROM billing where rfid=%s",(rfid,))
         row=self.cur.fetchall()
+        print(row)
         return row
 
     def viwebilladmin(self):
